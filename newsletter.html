@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -63,9 +65,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-10px);
             }
@@ -242,15 +247,20 @@
         }
 
         @keyframes float-bubble {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) translateX(0);
             }
+
             25% {
                 transform: translateY(-15px) translateX(10px);
             }
+
             50% {
                 transform: translateY(-25px) translateX(0);
             }
+
             75% {
                 transform: translateY(-10px) translateX(-10px);
             }
@@ -260,6 +270,7 @@
             0% {
                 box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
             }
+
             100% {
                 box-shadow: 0 0 25px rgba(138, 43, 226, 0.8);
             }
@@ -434,12 +445,29 @@
         }
 
         @keyframes heartbeat {
-            0% { transform: scale(1); }
-            5% { transform: scale(1.2); }
-            10% { transform: scale(1); }
-            15% { transform: scale(1.1); }
-            20% { transform: scale(1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            5% {
+                transform: scale(1.2);
+            }
+
+            10% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.1);
+            }
+
+            20% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         /* Responsive styles */
@@ -518,7 +546,7 @@
                 font-size: 0.95rem;
             }
         }
-        
+
         /* Language switch styles */
         .lang-switch {
             position: absolute;
@@ -558,6 +586,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -577,7 +606,8 @@
                     <!-- Benefits list -->
                     <ul class="newsletter-page-benefits">
                         <li class="highlight-benefit">Exclusive Mind Map PDF about self-development areas!</li>
-                        <li class="highlight-benefit pop-culture">Weekly wisdom from pop culture for your growth journey</li>
+                        <li class="highlight-benefit pop-culture">Weekly wisdom from pop culture for your growth journey
+                        </li>
                         <li>Tips and tricks for maintaining consistency in your habits</li>
                         <li>Science-based insights about holistic wellbeing</li>
                         <li>Early access to new features and special events</li>
@@ -597,7 +627,9 @@
                         <i class="fas fa-theater-masks"></i>
                         <div class="pop-culture-text">
                             <h3>Pop Culture Wisdom</h3>
-                            <p>Unlock practical life lessons from your favorite movies, TV shows, and books. From Ted Lasso's optimism to Marvel heroes' resilience - we find growth lessons in the stories you already love.</p>
+                            <p>Unlock practical life lessons from your favorite movies, TV shows, and books. From Ted
+                                Lasso's optimism to Marvel heroes' resilience - we find growth lessons in the stories
+                                you already love.</p>
                         </div>
                     </div>
 
@@ -605,10 +637,12 @@
                     <div class="newsletter-embedded-form">
                         <form id="newsletter-form" class="newsletter-form">
                             <!-- Name -->
-                            <input type="text" class="newsletter-input" id="newsletter-name" placeholder="Your Name (optional, but nice to meet you 💜)">
+                            <input type="text" class="newsletter-input" id="newsletter-name"
+                                placeholder="Your Name (optional, but nice to meet you 💜)">
 
                             <!-- Email -->
-                            <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Your Email Address" required>
+                            <input type="email" class="newsletter-input" id="newsletter-email"
+                                placeholder="Your Email Address" required>
 
                             <button type="submit" class="newsletter-submit" id="submit-button">
                                 <i class="fas fa-paper-plane"></i>
@@ -617,11 +651,13 @@
                         </form>
 
                         <div class="newsletter-success" id="success-message">
-                            <strong>Awesome!</strong> You're now part of our self-development community. Check your email for a special welcome message.
+                            <strong>Awesome!</strong> You're now part of our self-development community. Check your
+                            email for a special welcome message.
                         </div>
 
                         <div class="newsletter-error" id="error-message">
-                            <strong>Oops!</strong> Something went wrong with your subscription. Please try again or contact us directly.
+                            <strong>Oops!</strong> Something went wrong with your subscription. Please try again or
+                            contact us directly.
                         </div>
                     </div>
 
@@ -642,16 +678,7 @@
         // Campaign token obtained from GetResponse
         const CAMPAIGN_TOKEN = 'itLli';
 
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // Language switch functionality
-            const langSwitch = document.getElementById('langSwitch');
-            langSwitch.addEventListener('change', function() {
-                if (!this.checked) {
-                    // Redirect to the Polish version
-                    window.location.href = './newsletter-pl.html';
-                }
-            });
+        document.addEventListener('DOMContentLoaded', function () {
             // Newsletter form elements
             const newsletterForm = document.getElementById('newsletter-form');
             const emailInput = document.getElementById('newsletter-email');
@@ -659,6 +686,15 @@
             const submitButton = document.getElementById('submit-button');
             const successMessage = document.getElementById('success-message');
             const errorMessage = document.getElementById('error-message');
+
+            // Language switch functionality - tylko sprawdza czy element istnieje przed dodaniem listenera
+            const langSwitch = document.querySelector('.lang-switch a');
+            if (langSwitch) {
+                langSwitch.addEventListener('click', function (e) {
+                    // Let the default behavior handle the navigation
+                    // (already handled by the href attribute)
+                });
+            }
 
             // Check if already subscribed from localStorage
             try {
@@ -671,13 +707,14 @@
             }
 
             // Handle form submission
-            newsletterForm.addEventListener('submit', function(event) {
+            newsletterForm.addEventListener('submit', function (event) {
                 event.preventDefault();
-                
+
                 const email = emailInput.value.trim();
                 const name = nameInput.value.trim();
-                
+
                 if (!email || !email.includes('@')) {
+                    errorMessage.textContent = 'Please enter a valid email address.';
                     errorMessage.classList.add('show');
                     setTimeout(() => {
                         errorMessage.classList.remove('show');
@@ -687,70 +724,105 @@
 
                 // Show loading state
                 submitButton.disabled = true;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Subscribing...</span>';
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing...</span>';
 
-                // Subscribe to newsletter
-                subscribeToNewsletter(email, name)
-                    .then(() => {
-                        // Success case
-                        successMessage.classList.add('show');
-                        errorMessage.classList.remove('show');
-                        
-                        // Reset form
-                        newsletterForm.reset();
+                // Subscribe to newsletter using fetch API instead of hidden form
+                sendSubscriptionRequest(email, name)
+                    .then(response => {
+                        if (response.ok) {
+                            // Success case
+                            successMessage.classList.add('show');
+                            errorMessage.classList.remove('show');
+
+                            // Mark as subscribed in localStorage
+                            localStorage.setItem('newsletterSubscribed', 'true');
+
+                            // Reset form
+                            newsletterForm.reset();
+                        } else {
+                            throw new Error('Subscription request failed');
+                        }
                     })
                     .catch(error => {
-                        // Error case
-                        console.error('Newsletter subscription failed:', error);
-                        errorMessage.classList.add('show');
-                        successMessage.classList.remove('show');
-                        
-                        // Hide error after 5 seconds
-                        setTimeout(() => {
-                            errorMessage.classList.remove('show');
-                        }, 5000);
+                        // Error case - fallback to the old method
+                        console.warn('Fetch subscription failed, trying fallback method:', error);
+
+                        // Use the fallback method with form submission
+                        subscribeToNewsletterFallback(email, name)
+                            .then(() => {
+                                successMessage.classList.add('show');
+                                errorMessage.classList.remove('show');
+                                newsletterForm.reset();
+                            })
+                            .catch(fallbackError => {
+                                console.error('Newsletter subscription failed:', fallbackError);
+                                errorMessage.textContent = 'Subscription failed. Please try again or contact us directly.';
+                                errorMessage.classList.add('show');
+                                successMessage.classList.remove('show');
+                            });
                     })
                     .finally(() => {
-                        // Reset button state
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = '<i class="fas fa-paper-plane"></i><span>Join the Community</span>';
+                        // Reset button state after short delay
+                        setTimeout(() => {
+                            submitButton.disabled = false;
+                            const buttonText = document.documentElement.lang === 'pl'
+                                ? '<i class="fas fa-paper-plane"></i><span>Dołącz do Społeczności</span>'
+                                : '<i class="fas fa-paper-plane"></i><span>Join the Community</span>';
+                            submitButton.innerHTML = buttonText;
+                        }, 1500);
                     });
             });
 
             /**
-             * Subscribes to the newsletter using GetResponse
-             * 
-             * @param email - Subscriber's email address
-             * @param name - Optional subscriber's name
-             * @returns Promise resolving when subscription is complete
+             * Send subscription request using Fetch API (modern approach)
              */
-            function subscribeToNewsletter(email, name = '') {
+            function sendSubscriptionRequest(email, name = '') {
+                // Create form data
+                const formData = new FormData();
+                formData.append('campaign_token', CAMPAIGN_TOKEN);
+                formData.append('email', email);
+                if (name) {
+                    formData.append('name', name);
+                }
+
+                // Attempting to use fetch to submit the form data directly
+                return fetch('https://app.getresponse.com/add_subscriber.html', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // This is needed for cross-domain requests
+                });
+            }
+
+            /**
+             * Fallback subscription method using hidden form (original approach)
+             */
+            function subscribeToNewsletterFallback(email, name = '') {
                 return new Promise((resolve, reject) => {
                     try {
-                        // Generate unique submission ID to track completion
+                        // Generate unique submission ID
                         const submissionId = `gr_sub_${Date.now()}`;
-                        
+
                         // Create form for newsletter submission
                         const form = document.createElement('form');
                         form.method = 'POST';
                         form.action = `https://app.getresponse.com/add_subscriber.html?submission_id=${submissionId}`;
                         form.target = '_blank'; // Open in new tab
                         form.style.display = 'none';
-                        
+
                         // Add campaign token
                         const campaignInput = document.createElement('input');
                         campaignInput.type = 'hidden';
                         campaignInput.name = 'campaign_token';
                         campaignInput.value = CAMPAIGN_TOKEN;
                         form.appendChild(campaignInput);
-                        
+
                         // Add email field
                         const emailInput = document.createElement('input');
                         emailInput.type = 'hidden';
                         emailInput.name = 'email';
                         emailInput.value = email;
                         form.appendChild(emailInput);
-                        
+
                         // Add name field if provided
                         if (name) {
                             const nameInput = document.createElement('input');
@@ -759,29 +831,30 @@
                             nameInput.value = name;
                             form.appendChild(nameInput);
                         }
-                        
-                        // Add redirect URL (using a playful thank you page)
+
+                        // Add redirect URL
                         const thankYouPageInput = document.createElement('input');
                         thankYouPageInput.type = 'hidden';
                         thankYouPageInput.name = 'thankyou_url';
                         thankYouPageInput.value = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
                         form.appendChild(thankYouPageInput);
-                        
+
+                        // Add API key
                         const apiKeyInput = document.createElement('input');
                         apiKeyInput.type = 'hidden';
                         apiKeyInput.name = 'api_key';
                         apiKeyInput.value = 'h8leysn3qlgbccnrxr942p0ivu0gdi15';
                         form.appendChild(apiKeyInput);
-                        
+
                         // Add form to body and submit
                         document.body.appendChild(form);
                         form.submit();
-                        
+
                         // Remove form from DOM after submission
                         setTimeout(() => {
                             document.body.removeChild(form);
                         }, 100);
-                        
+
                         // Mark as subscribed
                         localStorage.setItem('newsletterSubscribed', 'true');
                         resolve();
@@ -794,4 +867,5 @@
         });
     </script>
 </body>
+
 </html>
