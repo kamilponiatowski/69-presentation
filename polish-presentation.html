@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>69 Shades of Love - Prezentacja Projektu</title>
+    <style>
+        :root {
+            --main-color: #C41E3A;
+            --accent-color: #8A2BE2;
+            --physical-color: #FF9F29;
+            --mental-color: #7ED957;
+            --personal-color: #FFD966;
+            --relationship-color: #FF97B7;
+            --bg-color: #FFF0F5;
+            --text-color: #333;
+            --card-bg: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .slides {
+            flex: 1;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+        }
+
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c41e3a' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            z-index: 1;
+            position: relative;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .title h1 {
+            color: var(--main-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .title h2 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            font-weight: normal;
+        }
+
+        .main-heading {
+            color: var(--main-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-heading::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--main-color), var(--accent-color));
+            bottom: -5px;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .subheading {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background-color: #ffe4e9;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: var(--main-color);
+            font-weight: bold;
+        }
+
+        .flex-row {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            flex: 1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-bg);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .card.physical {
+            border-top: 4px solid var(--physical-color);
+        }
+
+        .card.mental {
+            border-top: 4px solid var(--mental-color);
+        }
+
+        .card.personal {
+            border-top: 4px solid var(--personal-color);
+        }
+
+        .card.relationship {
+            border-top: 4px solid var(--relationship-color);
+        }
+
+        .feature-list {
+            list-style-type: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .feature-list i {
+            color: var(--main-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .promo-box {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(196, 30, 58, 0.1));
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .promo-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--main-color), #a01a30);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 10px rgba(196, 30, 58, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(196, 30, 58, 0.4);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .grid-item {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-item i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .newsletter-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 2rem 0;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+        }
+
+        .progress-container {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 20%;
+            background: linear-gradient(90deg, var(--physical-color), var(--mental-color), var(--personal-color), var(--relationship-color));
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-size: 4rem;
+            color: rgba(138, 43, 226, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            text-align: right;
+            color: var(--main-color);
+        }
+
+        .duck-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .duck-footer span {
+            color: var(--main-color);
+            font-size: 1.2rem;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.2); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Language Switch */
+        .lang-switch-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .switch-label {
+            font-weight: bold;
+            color: #444;
+            margin-right: 10px;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .flex-row {
+                flex-direction: column;
+            }
+
+            .slide-content {
+                padding: 1.5rem;
+            }
+
+            .title h1 {
+                font-size: 2rem;
+            }
+
+            .title h2 {
+                font-size: 1.2rem;
+            }
+
+            .main-heading {
+                font-size: 1.7rem;
+            }
+
+            .subheading {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+        <!-- Language Switch -->
+        <div class="lang-switch-container">
+            <span class="switch-label">PL/EN</span>
+            <label class="switch">
+                <input type="checkbox" id="langSwitch">
+                <span class="slider"></span>
+            </label>
+        </div>
+    <div class="slide-container">
+        <div class="slides">
+            <!-- Slide 1: Intro -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="title">
+                        <h1>69 Shades of Love</h1>
+                        <h2>Twoja Kompleksowa Podróż Samorozwoju</h2>
+                    </div>
+                    <div class="duck-image" style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">🦆</div>
+                    <p style="text-align: center; font-size: 1.2rem;">
+                        Aplikacja, która pomoże Ci zadbać o <span class="highlight">holistyczny rozwój</span> w czterech kluczowych wymiarach życia.
+                    </p>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number">69</div>
+                            <div class="stat-label">Zadań Samorozwoju</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Kluczowe Obszary</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Lepsza Wersja Ciebie</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="#" class="cta-button">Dołącz do Nas!</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Problem -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Wyzwanie</h2>
+                    <p>
+                        Czy kiedykolwiek czułeś/aś, że Twój plan dbania o siebie jest bardziej <span class="highlight">listą życzeń</span> niż planem działania?
+                    </p>
+                    <div class="flex-row">
+                        <div class="card">
+                            <div class="card-icon">😔</div>
+                            <div class="card-title">Brak Systematyczności</div>
+                            <p>Trudno utrzymać nawyki samorozwoju bez odpowiedniego systemu śledzenia i motywacji.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🔍</div>
+                            <div class="card-title">Fragmentaryczne Podejście</div>
+                            <p>Większość narzędzi skupia się tylko na jednym aspekcie dobrostanu, pomijając holistyczne spojrzenie.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">Brak Mierzalnych Wyników</div>
+                            <p>Trudno zobaczyć swoje postępy i świętować małe zwycięstwa bez wizualnej reprezentacji.</p>
+                        </div>
+                    </div>
+                    <div class="quote">
+                        "Mamy tendencję do przeceniania tego, co możemy zrobić w jeden dzień i niedoceniania tego, co możemy osiągnąć w rok systematycznej pracy."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Solution -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Rozwiązanie</h2>
+                    <p>
+                        <span class="highlight">69 Shades of Love</span> to nie tylko aplikacja do śledzenia zadań - to kompleksowy przewodnik po samorozwoju, starannie zaprojektowany w czterech kluczowych wymiarach życia.
+                    </p>
+                    <div class="flex-row">
+                        <div class="card physical">
+                            <div class="card-icon">💪</div>
+                            <div class="card-title">Zdrowie Fizyczne</div>
+                            <p>20 praktycznych zadań, które pomogą Ci dbać o swoje ciało i energię każdego dnia.</p>
+                        </div>
+                        <div class="card mental">
+                            <div class="card-icon">🧠</div>
+                            <div class="card-title">Dobrostan Psychiczny</div>
+                            <p>17 praktyk uważności wspierających Twój spokój umysłu i zdrowie emocjonalne.</p>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="card personal">
+                            <div class="card-icon">🌈</div>
+                            <div class="card-title">Osobista Radość</div>
+                            <p>18 sposobów na odnalezienie szczęścia w codzienności i celebrowanie drobnych przyjemności.</p>
+                        </div>
+                        <div class="card relationship">
+                            <div class="card-icon">❤️</div>
+                            <div class="card-title">Relacje</div>
+                            <p>14 zadań wzmacniających Twoje więzi z bliskimi i budujących głębsze połączenia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Features -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Kluczowe Funkcje</h2>
+                    <p>
+                        Co sprawia, że <span class="highlight">69 Shades of Love</span> jest wyjątkowym doświadczeniem samorozwoju?
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-chart-line"></i> <strong>Intuicyjne śledzenie postępów</strong> - wizualizuj swoją drogę z pomocą przejrzystych wskaźników</li>
+                        <li><i class="fas fa-trophy"></i> <strong>System osiągnięć</strong> - celebruj każdy mały sukces i utrzymuj motywację</li>
+                        <li><i class="fas fa-unlock-alt"></i> <strong>Odblokowanie specjalnej Mapy Myśli PDF</strong> - otrzymaj dodatkowy zasób po osiągnięciu 20% zadań</li>
+                        <li><i class="fas fa-lightbulb"></i> <strong>Codzienne wskazówki oparte na nauce</strong> - praktyczne porady, które możesz natychmiast zastosować</li>
+                        <li><i class="fas fa-fire"></i> <strong>Licznik serii</strong> - śledź swoje codzienne zaangażowanie i buduj konsekwencję</li>
+                        <li><i class="fas fa-heart"></i> <strong>Holistyczne podejście</strong> - zbalansowany rozwój we wszystkich kluczowych obszarach życia</li>
+                    </ul>
+                    <div class="promo-box">
+                        <h3>🎁 Specjalny Bonus dla Wczesnych Użytkowników</h3>
+                        <p>Zapisz się na nasz newsletter i otrzymaj ekskluzywny poradnik <strong>"7 Szybkich Nawyków, Które Transformują Twój Dzień"</strong> - praktyczny przewodnik budowania lepszych rutyn oparty na badaniach naukowych!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Benefits -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Korzyści</h2>
+                    <p>
+                        Jak <span class="highlight">69 Shades of Love</span> może zmienić Twoje życie?
+                    </p>
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Systematyczny rozwój osobisty
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Lepsza równowaga życiowa
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Redukcja stresu i lęku
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Większa energia życiowa
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Poprawa jakości snu
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Głębsze relacje z bliskimi
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Większa świadomość siebie
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Odkrywanie nowych źródeł radości
+                        </div>
+                        <div class="grid-item">
+                            <i class="fas fa-check-circle"></i> Większa produktywność
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Korzystam z 69 Shades of Love od miesiąca i jestem pod wrażeniem, jak moje drobne codzienne działania przekładają się na zauważalną poprawę samopoczucia. Szczególnie doceniam holistyczne podejście - w końcu narzędzie, które dba o wszystkie aspekty mojego życia!"</p>
+                        <div class="testimonial-author">- Anna, 32 lata</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Progress Demo -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Śledź Swój Postęp</h2>
+                    <p>
+                        Wizualizuj swoją drogę samorozwoju z intuicyjnymi wskaźnikami postępu.
+                    </p>
+                    <h3 class="subheading">Twój Całkowity Postęp</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p>
+                        Odblokuj Mapę Myśli PDF po osiągnięciu 20% zadań!
+                    </p>
+                    <h3 class="subheading">Postęp w Poszczególnych Obszarach</h3>
+                    <div class="flex-row">
+                        <div class="card physical">
+                            <div class="card-icon">
+                                <div style="height: 10px; width: 80%; background-color: var(--physical-color); border-radius: 5px; margin: 0 auto;"></div>
+                            </div>
+                            <div class="card-title">Fizyczne</div>
+                            <p style="text-align: center;">40%</p>
+                        </div>
+                        <div class="card mental">
+                            <div class="card-icon">
+                                <div style="height: 10px; width: 60%; background-color: var(--mental-color); border-radius: 5px; margin: 0 auto;"></div>
+                            </div>
+                            <div class="card-title">Umysłowe</div>
+                            <p style="text-align: center;">30%</p>
+                        </div>
+                        <div class="card personal">
+                            <div class="card-icon">
+                                <div style="height: 10px; width: 40%; background-color: var(--personal-color); border-radius: 5px; margin: 0 auto;"></div>
+                            </div>
+                            <div class="card-title">Osobiste</div>
+                            <p style="text-align: center;">20%</p>
+                        </div>
+                        <div class="card relationship">
+                            <div class="card-icon">
+                                <div style="height: 10px; width: 20%; background-color: var(--relationship-color); border-radius: 5px; margin: 0 auto;"></div>
+                            </div>
+                            <div class="card-title">Relacje</div>
+                            <p style="text-align: center;">10%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Example Tasks -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Przykładowe Zadania</h2>
+                    <p>
+                        Oto próbka zadań, które znajdziesz w naszej aplikacji:
+                    </p>
+                    <div class="flex-row">
+                        <div class="card physical">
+                            <div class="card-icon">💪</div>
+                            <div class="card-title">Tryb Śpiącej Królewny</div>
+                            <p>8 godzin snu minimum, bez wyjątków!</p>
+                        </div>
+                        <div class="card mental">
+                            <div class="card-icon">🧠</div>
+                            <div class="card-title">Wakacje dla Myśli</div>
+                            <p>Medytacja bez hashtagów</p>
+                        </div>
+                        <div class="card personal">
+                            <div class="card-icon">🌈</div>
+                            <div class="card-title">Muzyczna Medycyna</div>
+                            <p>Sesja terapeutyczna z playlistą</p>
+                        </div>
+                        <div class="card relationship">
+                            <div class="card-icon">❤️</div>
+                            <div class="card-title">Prysznic Wdzięczności</div>
+                            <p>Lista doceniania wypowiedziana na głos</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 2rem;">
+                        <span class="highlight">69 unikalnych zadań</span> czeka na Ciebie w aplikacji!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 8: Final Slide -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="main-heading">Rozpocznij Swoją Podróż Samorozwoju</h2>
+                    <p style="text-align: center; font-size: 1.2rem;">
+                        Dołącz do społeczności ludzi, którzy dbają o holistyczny rozwój i codziennie stają się lepszą wersją siebie.
+                    </p>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgdmlld0JveD0iMCAwIDg3OSA4NzkiPjxwYXRoIGQ9Ik0gMzA3IDExNS4xMzQgQyAyNTAuNjMyIDEyMC44OTUsIDE5NS45ODcgMTQ5LjQ5NSwgMTU5LjIwNSAxOTIuNDg4IEMgMTEzLjQ5NCAyNDUuOTE4LCA5NS4xNzggMzE0LjMyOCwgMTA4LjA2MiAzODMuNTAwIEMgMTE3LjUyMSA0MzQuMjgyLCAxNDYuMTI3IDQ4Mi40MTIsIDE4Ni41MDAgNTE1LjQ3MyBDIDE5OS4wNDUgNTI1Ljc0NiwgMjA0Ljk1NiA1MjkuNzIxLCAyMjYuMDc4IDU0Mi4wOTAgQyAyNDQuMjA1IDU1Mi43MDYsIDI2MS4wMTEgNTYyLjU1OCwgMzAzIDU4Ny4xODcgQyAzMTcuNTc1IDU5NS43MzYsIDM4Ni44NzUgNjM2LjM4MSwgNDU3IDY3Ny41MTAgQyA1MjcuMTI1IDcxOC42MzksIDU4Ni45MDUgNzUzLjM2MiwgNTg5Ljg0MyA3NTQuNjczIEMgNjA5Ljg4MCA3NjMuNjEzLCA2NDEuMjA5IDc2Ni42NTMsIDY2NS4zMDAgNzYxLjk5NiBDIDcwNy4zOTAgNzUzLjg2MCwgNzQyLjU0OSA3MjcuMDc0LCA3NjEuNzcxIDY4OC41MDAgQyA3NzcuMDkwIDY1Ny43NTksIDc3OS42OTIgNjE5LjkxMywgNzY4Ljc4NSA1ODYuNTAwIEMgNzYzLjgyOSA1NzEuMzE3LCA3NTYuMzM3IDU1OC43MDgsIDcyNi43NzggNTE1LjgwMiBDIDcwMC4xNzQgNDc3LjE4NSwgNjYwLjUxNiA0MTkuNTc5LCA1OTguNTIyIDMyOS41MDAgQyA1ODQuMTM4IDMwOC42MDAsIDU1OS4zODAgMjcyLjYwMCwgNTQzLjUwNCAyNDkuNTAwIEMgNTEyLjQwMCAyMDQuMjQzLCA1MDguMTY0IDE5OC40NzgsIDQ5Ny41NzUgMTg3LjAwNCBDIDQ0OS4wMTAgMTM0LjM3NCwgMzc4LjU5MiAxMDcuODE4LCAzMDcgMTE1LjEzNCBNIDI5Ny41MDAgMjQ2LjA3MiBDIDI3OC40MTAgMjQ3LjQ0MiwgMjU5LjYyMCAyNDkuMDc3LCAyNTYuMjQ0IDI0OS42NjEgTCAyNTIuOTg5IDI1MC4yMjUgMjUzLjI0NCAzMzMuMzYyIEwgMjUzLjUwMCA0MTYuNTAwIDI4Ny43NTAgNDE2Ljc2MyBMIDMyMiA0MTcuMDI2IDMyMiA0MDEuNzYzIEwgMzIyLjAwMSAzODYuNTAwIDMzOC4yNTAgMzg2LjQxMyBDIDM1Ni4yNjIgMzg2LjMxNywgMzY0LjYyMSAzODQuNzA1LCAzNzYuODkzIDM3OC45NjMgQyAzOTcuNDE5IDM2OS4zNTgsIDQxMi44NDQgMzUwLjU3MywgNDE3LjU0MSAzMjkuNDYxIEMgNDE5LjY3NyAzMTkuODU5LCA0MTkuMTAyIDI5Ni44MDYsIDQxNi40OTMgMjg3LjUwMCBDIDQwOS43NTEgMjYzLjQ0NCwgMzkzLjE0MiAyNTAuODE2LCAzNjIuNTE3IDI0Ni40NjEgQyAzNTEuNjAzIDI0NC45MDksIDMxNi42MTQgMjQ0LjY5OSwgMjk3LjUwMCAyNDYuMDcyIE0gMzQwLjUwMCAyODkuODQ1IEMgMzM1LjAyMSAyOTEuODk5LCAzMjkuMjgwIDI5NS4wNjksIDMyNC4yNTAgMjk4LjgxNiBMIDMyMSAzMDEuMjM3IDMyMSAzMTkuOTUyIEMgMzIxIDMzMC4yNDUsIDMyMS4yNzggMzM4Ljk0NSwgMzIxLjYxOCAzMzkuMjg0IEMgMzIyLjU4NSAzNDAuMjUyLCAzMzguODIyIDMzMS43MjAsIDM0NS43ODkgMzI2LjU4MyBDIDM1My4wNTEgMzIxLjIyOSwgMzU3LjQxOCAzMTQuOTYwLCAzNTkuMDkwIDMwNy40ODggQyAzNjIuMjk1IDI5My4xNjcsIDM1My42MTQgMjg0LjkyOCwgMzQwLjUwMCAyODkuODQ1IiBzdHJva2U9Im5vbmUiIGZpbGw9IiM4QTJCRTIiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==" alt="Duck Logo" style="width: 120px; height: 120px;">
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="./newsletter-pl.html" class="cta-button">Zapisz się na Newsletter</a>
+                    </div>
+                    <div class="duck-footer">
+                        <p>Stworzone z <span>💜</span> przez ProDucktive (What The Quack)</p>
+                        <p>Email: poniatowski.dev@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funkcja do inicjalizacji prezentacji
+        document.addEventListener('DOMContentLoaded', function() {
+            // Opcjonalnie: kod JavaScript dla interakcji w prezentacji
+            
+            // Przykład: animacja procentów w paskach postępu
+            setTimeout(() => {
+                document.querySelector('.progress-bar').style.width = '20%';
+            }, 1000);
+            
+            // Dodanie eventów do przycisków CTA
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Przy kliknięciu w przyciski, przewiń do ostatniego slajdu z formularzem
+                    // e.preventDefault();
+                    const slides = document.querySelectorAll('.slide');
+                    const newsletterSlide = slides[7]; // 8 slajd (indeks 7) to slajd z formularzem
+                    newsletterSlide.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Language switch functionality
+            const langSwitch = document.getElementById('langSwitch');
+            langSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    // Redirect to the Polish version
+                    window.location.href = './index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

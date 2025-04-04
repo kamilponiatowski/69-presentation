@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>69 Shades of Love - Newsletter</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #C41E3A;
+            --accent-color: #8A2BE2;
+            --physical-color: #FF9F29;
+            --mental-color: #7ED957;
+            --personal-color: #FFD966;
+            --relationship-color: #FF97B7;
+            --bg-color: #FFF0F5;
+            --text-color: #333;
+            --card-bg: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.3rem;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+
+        .duck-icon {
+            font-size: 3rem;
+            margin: 1rem 0;
+            animation: float 3s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .page-layout {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem 20px;
+            flex: 1;
+        }
+
+        .newsletter-page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .content-section {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--main-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--main-color), var(--accent-color));
+            bottom: -5px;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .newsletter-page-benefits {
+            list-style: none;
+            padding-left: 5px;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-page-benefits li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            transition: transform 0.3s ease;
+        }
+
+        .newsletter-page-benefits li:hover {
+            transform: translateX(5px);
+        }
+
+        .newsletter-page-benefits li::before {
+            content: "🦆";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
+        }
+
+        .highlight-benefit {
+            font-weight: bold;
+            color: var(--main-color);
+            margin-bottom: 15px !important;
+            padding: 8px 8px 8px 30px !important;
+            border-radius: 8px;
+            background-color: rgba(196, 30, 58, 0.05);
+        }
+
+        .highlight-benefit::before {
+            content: "🎁" !important;
+        }
+
+        .highlight-benefit.pop-culture::before {
+            content: "🚀" !important;
+        }
+
+        .highlight-benefit.pop-culture {
+            background-color: rgba(138, 43, 226, 0.05);
+            color: var(--accent-color);
+        }
+
+        .pop-culture-section {
+            position: relative;
+            display: flex;
+            gap: 15px;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.85), rgba(106, 17, 203, 0.9));
+            box-shadow: 0 5px 20px rgba(106, 17, 203, 0.3);
+            overflow: hidden;
+            color: white;
+            animation: glow 3s infinite alternate;
+        }
+
+        .bubble-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(1px);
+            animation: float-bubble 25s infinite ease-in-out;
+        }
+
+        .bubble-1 {
+            width: 60px;
+            height: 60px;
+            left: 10%;
+            top: 20%;
+            animation-delay: -2s;
+            opacity: 0.6;
+        }
+
+        .bubble-2 {
+            width: 80px;
+            height: 80px;
+            right: 15%;
+            bottom: 20%;
+            animation-delay: -5s;
+            opacity: 0.4;
+        }
+
+        .bubble-3 {
+            width: 40px;
+            height: 40px;
+            right: 30%;
+            top: 30%;
+            animation-delay: -7s;
+            opacity: 0.7;
+        }
+
+        .bubble-4 {
+            width: 120px;
+            height: 120px;
+            left: 25%;
+            bottom: -40px;
+            animation-delay: -15s;
+            opacity: 0.3;
+        }
+
+        .bubble-5 {
+            width: 50px;
+            height: 50px;
+            right: 5%;
+            top: 50%;
+            animation-delay: -10s;
+            opacity: 0.5;
+        }
+
+        @keyframes float-bubble {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-15px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-25px) translateX(0);
+            }
+            75% {
+                transform: translateY(-10px) translateX(-10px);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(138, 43, 226, 0.8);
+            }
+        }
+
+        .pop-culture-section i {
+            font-size: 2.5rem;
+            color: #FFD304;
+            margin-top: 3px;
+            z-index: 2;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .pop-culture-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pop-culture-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #FFD304;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .pop-culture-text p {
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .newsletter-embedded-form {
+            margin-top: 40px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(138, 43, 226, 0.05));
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .newsletter-form {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: #777;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
+
+        .newsletter-submit {
+            position: relative;
+            background: linear-gradient(135deg, var(--accent-color), #6a11cb);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+            font-size: 1.05rem;
+            overflow: hidden;
+        }
+
+        .newsletter-submit:hover,
+        .newsletter-submit:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #7B25D1, #5a11ab);
+        }
+
+        .newsletter-submit i {
+            margin-right: 10px;
+        }
+
+        .newsletter-success,
+        .newsletter-error {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .newsletter-success {
+            background-color: rgba(0, 200, 83, 0.15);
+            border-left: 4px solid rgba(0, 200, 83, 0.6);
+        }
+
+        .newsletter-error {
+            background-color: rgba(255, 0, 0, 0.15);
+            border-left: 4px solid rgba(255, 0, 0, 0.6);
+        }
+
+        .newsletter-success.show,
+        .newsletter-error.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .heart-icon {
+            color: var(--main-color);
+            font-size: 1.2rem;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.2); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .page-layout {
+                padding: 1.5rem 15px;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .pop-culture-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .pop-culture-section i {
+                margin-bottom: 10px;
+                font-size: 2rem;
+            }
+
+            .newsletter-embedded-form {
+                padding: 20px;
+            }
+
+            .newsletter-input {
+                padding: 12px 15px;
+            }
+
+            .newsletter-submit {
+                padding: 12px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header h2 {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-section {
+                padding: 1.2rem;
+            }
+
+            .newsletter-embedded-form {
+                padding: 15px;
+                margin-top: 20px;
+            }
+
+            .newsletter-page-benefits li {
+                font-size: 0.95rem;
+                padding-left: 25px;
+            }
+
+            .highlight-benefit {
+                padding: 5px 5px 5px 25px !important;
+            }
+
+            .newsletter-input {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+
+            .newsletter-submit {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Language switch styles */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switch:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .lang-switch a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .lang-switch i {
+            margin-right: 5px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .lang-switch {
+                top: 10px;
+                right: 10px;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="lang-switch">
+                <a href="newsletter-pl.html"><i class="fas fa-globe"></i> PL</a>
+            </div>
+            <h1>69 Shades of Love</h1>
+            <h2>Our Newsletter - Your Gateway to Self-Development</h2>
+            <div class="duck-icon">🦆</div>
+        </header>
+
+        <div class="page-layout">
+            <main class="newsletter-page-content">
+                <div class="content-section">
+                    <h2 class="section-title">Why Join Our Newsletter?</h2>
+
+                    <!-- Benefits list -->
+                    <ul class="newsletter-page-benefits">
+                        <li class="highlight-benefit">Exclusive Mind Map PDF about self-development areas!</li>
+                        <li class="highlight-benefit pop-culture">Weekly wisdom from pop culture for your growth journey</li>
+                        <li>Tips and tricks for maintaining consistency in your habits</li>
+                        <li>Science-based insights about holistic wellbeing</li>
+                        <li>Early access to new features and special events</li>
+                        <li>Community stories and inspiring case studies</li>
+                        <li>Relatable self-development memes that make growth fun</li>
+                    </ul>
+
+                    <!-- Pop Culture Section -->
+                    <div class="pop-culture-section">
+                        <div class="bubble-background">
+                            <div class="bubble bubble-1"></div>
+                            <div class="bubble bubble-2"></div>
+                            <div class="bubble bubble-3"></div>
+                            <div class="bubble bubble-4"></div>
+                            <div class="bubble bubble-5"></div>
+                        </div>
+                        <i class="fas fa-theater-masks"></i>
+                        <div class="pop-culture-text">
+                            <h3>Pop Culture Wisdom</h3>
+                            <p>Unlock practical life lessons from your favorite movies, TV shows, and books. From Ted Lasso's optimism to Marvel heroes' resilience - we find growth lessons in the stories you already love.</p>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Form -->
+                    <div class="newsletter-embedded-form">
+                        <form id="newsletter-form" class="newsletter-form">
+                            <!-- Name -->
+                            <input type="text" class="newsletter-input" id="newsletter-name" placeholder="Your Name (optional, but nice to meet you 💜)">
+
+                            <!-- Email -->
+                            <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Your Email Address" required>
+
+                            <button type="submit" class="newsletter-submit" id="submit-button">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Join the Community</span>
+                            </button>
+                        </form>
+
+                        <div class="newsletter-success" id="success-message">
+                            <strong>Awesome!</strong> You're now part of our self-development community. Check your email for a special welcome message.
+                        </div>
+
+                        <div class="newsletter-error" id="error-message">
+                            <strong>Oops!</strong> Something went wrong with your subscription. Please try again or contact us directly.
+                        </div>
+                    </div>
+
+                    <a href="index.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to Main Page
+                    </a>
+                </div>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <p>Created with <span class="heart-icon">💜</span> by ProDucktive (What The Quack)</p>
+            <p>Email: poniatowski.dev@gmail.com</p>
+        </footer>
+    </div>
+
+    <script>
+        // Campaign token obtained from GetResponse
+        const CAMPAIGN_TOKEN = 'itLli';
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Language switch functionality
+            const langSwitch = document.getElementById('langSwitch');
+            langSwitch.addEventListener('change', function() {
+                if (!this.checked) {
+                    // Redirect to the Polish version
+                    window.location.href = './newsletter-pl.html';
+                }
+            });
+            // Newsletter form elements
+            const newsletterForm = document.getElementById('newsletter-form');
+            const emailInput = document.getElementById('newsletter-email');
+            const nameInput = document.getElementById('newsletter-name');
+            const submitButton = document.getElementById('submit-button');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if already subscribed from localStorage
+            try {
+                const isSubscribed = localStorage.getItem('newsletterSubscribed') === 'true';
+                if (isSubscribed) {
+                    successMessage.classList.add('show');
+                }
+            } catch (error) {
+                console.error('Error checking subscription status:', error);
+            }
+
+            // Handle form submission
+            newsletterForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const email = emailInput.value.trim();
+                const name = nameInput.value.trim();
+                
+                if (!email || !email.includes('@')) {
+                    errorMessage.classList.add('show');
+                    setTimeout(() => {
+                        errorMessage.classList.remove('show');
+                    }, 5000);
+                    return;
+                }
+
+                // Show loading state
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Subscribing...</span>';
+
+                // Subscribe to newsletter
+                subscribeToNewsletter(email, name)
+                    .then(() => {
+                        // Success case
+                        successMessage.classList.add('show');
+                        errorMessage.classList.remove('show');
+                        
+                        // Reset form
+                        newsletterForm.reset();
+                    })
+                    .catch(error => {
+                        // Error case
+                        console.error('Newsletter subscription failed:', error);
+                        errorMessage.classList.add('show');
+                        successMessage.classList.remove('show');
+                        
+                        // Hide error after 5 seconds
+                        setTimeout(() => {
+                            errorMessage.classList.remove('show');
+                        }, 5000);
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = '<i class="fas fa-paper-plane"></i><span>Join the Community</span>';
+                    });
+            });
+
+            /**
+             * Subscribes to the newsletter using GetResponse
+             * 
+             * @param email - Subscriber's email address
+             * @param name - Optional subscriber's name
+             * @returns Promise resolving when subscription is complete
+             */
+            function subscribeToNewsletter(email, name = '') {
+                return new Promise((resolve, reject) => {
+                    try {
+                        // Generate unique submission ID to track completion
+                        const submissionId = `gr_sub_${Date.now()}`;
+                        
+                        // Create form for newsletter submission
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = `https://app.getresponse.com/add_subscriber.html?submission_id=${submissionId}`;
+                        form.target = '_blank'; // Open in new tab
+                        form.style.display = 'none';
+                        
+                        // Add campaign token
+                        const campaignInput = document.createElement('input');
+                        campaignInput.type = 'hidden';
+                        campaignInput.name = 'campaign_token';
+                        campaignInput.value = CAMPAIGN_TOKEN;
+                        form.appendChild(campaignInput);
+                        
+                        // Add email field
+                        const emailInput = document.createElement('input');
+                        emailInput.type = 'hidden';
+                        emailInput.name = 'email';
+                        emailInput.value = email;
+                        form.appendChild(emailInput);
+                        
+                        // Add name field if provided
+                        if (name) {
+                            const nameInput = document.createElement('input');
+                            nameInput.type = 'hidden';
+                            nameInput.name = 'name';
+                            nameInput.value = name;
+                            form.appendChild(nameInput);
+                        }
+                        
+                        // Add redirect URL (using a playful thank you page)
+                        const thankYouPageInput = document.createElement('input');
+                        thankYouPageInput.type = 'hidden';
+                        thankYouPageInput.name = 'thankyou_url';
+                        thankYouPageInput.value = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`;
+                        form.appendChild(thankYouPageInput);
+                        
+                        const apiKeyInput = document.createElement('input');
+                        apiKeyInput.type = 'hidden';
+                        apiKeyInput.name = 'api_key';
+                        apiKeyInput.value = 'h8leysn3qlgbccnrxr942p0ivu0gdi15';
+                        form.appendChild(apiKeyInput);
+                        
+                        // Add form to body and submit
+                        document.body.appendChild(form);
+                        form.submit();
+                        
+                        // Remove form from DOM after submission
+                        setTimeout(() => {
+                            document.body.removeChild(form);
+                        }, 100);
+                        
+                        // Mark as subscribed
+                        localStorage.setItem('newsletterSubscribed', 'true');
+                        resolve();
+                    } catch (error) {
+                        console.error('Newsletter subscription error:', error);
+                        reject(error);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
