@@ -584,6 +584,58 @@
                 padding: 3px 8px;
             }
         }
+
+        /* Styl dla przycisku pobrania */
+        .download-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), #6a11cb);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+        }
+
+        .download-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(106, 17, 203, 0.4);
+        }
+
+        .download-button.pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(138, 43, 226, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(138, 43, 226, 0);
+            }
+        }
+
+        /* Styl dla sekcji z prezentem */
+        .gift-download {
+            margin-top: 15px;
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 200, 83, 0.05);
+            border-radius: 8px;
+            border: 1px dashed rgba(0, 200, 83, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .gift-download:hover {
+            background-color: rgba(0, 200, 83, 0.1);
+            transform: scale(1.02);
+        }
     </style>
 </head>
 
@@ -651,8 +703,19 @@
                         </form>
 
                         <div class="newsletter-success" id="success-message">
-                            <strong>Awesome!</strong> You're now part of our self-development community. Check your
-                            email for a special welcome message.
+                            <strong>Super!</strong> You are already part of our self-development community. Check your
+                            email to see a special welcome message.
+
+                            <div class="gift-download"
+                                style="margin-top: 15px; text-align: center; padding: 10px; background-color: rgba(0, 200, 83, 0.05); border-radius: 8px;">
+                                <p style="margin-bottom: 12px; font-weight: bold;">🎁 Your gift is ready for download!
+                                </p>
+                                <a href="screenshot-daily-routine.png" download class="download-button"
+                                    style="display: inline-block; background: linear-gradient(135deg, var(--accent-color), #6a11cb); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; transition: all 0.3s ease; font-weight: bold;">
+                                    <i class="fas fa-download" style="margin-right: 8px;"></i>
+                                    Get the gift
+                                </a>
+                            </div>
                         </div>
 
                         <div class="newsletter-error" id="error-message">
@@ -675,6 +738,19 @@
     </div>
 
     <script>
+        // Zmiana w funkcji, która pokazuje komunikat sukcesu
+        function showSuccessWithDownload() {
+            successMessage.classList.add('show');
+            errorMessage.classList.remove('show');
+
+            // Dodajemy efekt błysku do przycisku pobrania
+            const downloadButton = document.querySelector('.download-button');
+            if (downloadButton) {
+                setTimeout(() => {
+                    downloadButton.classList.add('pulse');
+                }, 500);
+            }
+        }
         // Campaign token obtained from GetResponse
         const CAMPAIGN_TOKEN = 'itLli';
 
@@ -700,7 +776,7 @@
             try {
                 const isSubscribed = localStorage.getItem('newsletterSubscribed') === 'true';
                 if (isSubscribed) {
-                    successMessage.classList.add('show');
+                    showSuccessWithDownload();
                 }
             } catch (error) {
                 console.error('Error checking subscription status:', error);
@@ -717,7 +793,7 @@
                     errorMessage.textContent = 'Please enter a valid email address.';
                     errorMessage.classList.add('show');
                     setTimeout(() => {
-                        errorMessage.classList.remove('show');
+                        showSuccessWithDownload();
                     }, 5000);
                     return;
                 }
@@ -731,8 +807,7 @@
                     .then(response => {
                         if (response.ok) {
                             // Success case
-                            successMessage.classList.add('show');
-                            errorMessage.classList.remove('show');
+                            showSuccessWithDownload();
 
                             // Mark as subscribed in localStorage
                             localStorage.setItem('newsletterSubscribed', 'true');
@@ -750,8 +825,7 @@
                         // Use the fallback method with form submission
                         subscribeToNewsletterFallback(email, name)
                             .then(() => {
-                                successMessage.classList.add('show');
-                                errorMessage.classList.remove('show');
+                                showSuccessWithDownload();
                                 newsletterForm.reset();
                             })
                             .catch(fallbackError => {
